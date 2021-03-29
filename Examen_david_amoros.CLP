@@ -1,11 +1,40 @@
 (deffacts datos (Lista 5 3 8 14 7)
-		(resultado 0) 
+		(resultado ?num) 
 		(objetivo 21)
      
 )
 
 (defrule multiplicar
 ?f <- (Lista ?a ?b $?c)
-	(resultado * ?a ?b)
+	(resultado ?num)
+	(<> (test (objetivo 21))	
+	(* ?a ?b)
+	(resultado ?num)
+	
+	
 =>
-(retract ?f)	
+(retract ?f)
+(assert	(Lista $?c ?num))
+)
+
+(defrule division
+?f <- (Lista $?s ?a ?b $?c)
+	(resultado ?num)
+	(cociente 0)
+	(<> (test (objetivo 21))
+	(div ?a ?b)
+	(= test (mod ?a ?b (cociente 0))
+=>
+(retract ?f)
+(assert (Lista $?s $?c ?num)
+)
+
+(defrule resta
+?f <- (Lista $?s ?a ?b $?c)
+	(resultado ?num)
+	
+
+
+
+
+ 
